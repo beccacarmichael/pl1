@@ -13,8 +13,8 @@ https://maps.googleapis.com/maps/api/directions/json?origin=place_id:ChIJH4BzrwX
 ```
 query string parameters:
 
-- origin=(place_id:ChIJH4BzrwX0K4gR2w0LqfwQcwI)[https://www.google.com/maps/search/?api=1&query=Waterloo%20Park&query_place_id=ChIJH4BzrwX0K4gR2w0LqfwQcwI]  
-- destination=(place_id:ChIJhUlGD9D1K4gR7Jad7d1UXCU)[https://www.google.com/maps/search/?api=1&query=Lady%20Glaze%20Doughnuts&query_place_id=ChIJhUlGD9D1K4gR7Jad7d1UXCU]  
+- origin=[place_id:ChIJH4BzrwX0K4gR2w0LqfwQcwI](https://www.google.com/maps/search/?api=1&query=Waterloo%20Park&query_place_id=ChIJH4BzrwX0K4gR2w0LqfwQcwI)  
+- destination=[place_id:ChIJhUlGD9D1K4gR7Jad7d1UXCU](https://www.google.com/maps/search/?api=1&query=Lady%20Glaze%20Doughnuts&query_place_id=ChIJhUlGD9D1K4gR7Jad7d1UXCU)  
 - mode=bicycling  
 - waypoints=place_id:ChIJRwHNEz71K4gRaLBOj-x889Y|place_id:ChIJodTTig30K4gRIHD1jB1vAt8  
 - key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE  
