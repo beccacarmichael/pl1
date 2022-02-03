@@ -1,18 +1,159 @@
+<!-- Based on https://googlemaps.github.io/js-samples/samples/single-infowindow/single-infowindow.html -->
 <!DOCTYPE html>
 <html>
   <head>
     <title>Story Map</title>
+    <script
+      type="text/javascript"
+      src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE"
+    ></script> <!-- API Key added to src -->
+    <script type="text/javascript">
 
-    <script>
-        console.log("hi beepy")
-    </script>
-    <style>
-       
-    </style>
+        google.maps.event.addDomListener(window, "load", function () {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13,
+                center: new google.maps.LatLng(43.6532, -79.3832),
+                mapTypeId: google.maps.MapTypeId.TERRAIN,
+            });
+    
+            var infoWindow = new google.maps.InfoWindow();
+    
+            var onMarkerClick = function () {
+                var marker = this;
+                var latLng = marker.getPosition();
+                infoWindow.setContent(this.name);  /* Retrieve custom name data that was added to marker objects*/
+                infoWindow.open(map, marker);
+            };
+            google.maps.event.addListener(map, "click", function () {
+                infoWindow.close();
+            });
 
-  </head>
-  <body>
-    <div id="map"></div>
+            /* Collection of locations */
+            const markers = [
+                ["Stop One: The Anndore House", 43.668672292272255, -79.38546843237685],
+                ["Stop Two: Hemingway's Restaurant", 43.6702382696227, -79.39278177285085],
+                ["Stop Three: ROM - The Royal Ontario Museum ", 43.667922426509726, -79.39477062310937],
+                ["Stop Four: AGO - The Art Gallery Of Ontario", 43.65385498165444, -79.39253375935996],
+                ["Stop Five: Seven Lives Tacos y Mariscos", 43.654703290693185, -79.40073907099782],
+                ["Stop Six: CN Tower", 43.6427680433585, -79.38711044586898],
+                ["Stop Seven: Ripley's Aquarium", 43.642419107205995, -79.38674407789534],
+                ["Stop Eight: The Rec Room", 43.641402009203894, -79.38675480673157]
+            ]
 
-  </body>
+            /* For each location in the list of markers, make a new marker, assign it the correct name, lat, and long, and put the click event listener on it */
+            for (i = 0; i < markers.length; i++) {
+                let name = markers[i][0]
+                let latitude = markers[i][1]
+                let longitude = markers[i][2]
+
+                var marker1 = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(latitude, longitude),
+                    name: name,
+                    label: String(i + 1),
+                });
+
+                google.maps.event.addListener(marker1, "click", onMarkerClick);
+            }
+  
+            /* Add a legend to the map */
+            const legend = document.getElementById("legend");
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
+            const div = document.createElement("div");
+            div.innerHTML = '<img src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi-dotless2_hdpi.png"> ' + "Trip Stop";
+            legend.appendChild(div);
+
+        });
+      </script>
+      <style type="text/css">
+        body {
+          font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        #map-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        #map {
+          width: 800px;
+          height: 800px;
+        }
+        #tourist-weekend {
+            margin: 10px 80px;
+        }
+        section {
+            margin: 45px 0px;
+        }
+        #legend {
+            font-family: Arial, sans-serif;
+            background: White;
+            padding: 10px;
+            margin: 10px;
+            border: 3px solid black;
+        }
+        #legend h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+        #legend img {
+            vertical-align: middle;
+            /* icon is 54x86 normally, make it half as big*/
+            width: 27px;
+            height: 43px;
+        }
+      </style>
+    </head>
+    <body>
+        <article id="tourist-weekend">
+            <header>
+                <h1> Epic Toronto Tourist Weekend </h1>
+                <h2> This itinerary of a 3 day getaway in Toronto, Ontario is guaranteed to give you an outstanding experience of all the hot tourist spots the city has to offer.</h2>
+                <p> Use this itinerary and interactive map to help guide you to the many destinations around the city. Each stop is listed bellow with information about the location and when it is suggested you 
+                    visit. The map can be used to get your bearings on each stop, and spy other points of interest along the way. Each stop is numbered so you can insure you are headed to the next destination on your trip. 
+                    To learn more about each stop click on the Trip Stop icon, to deselect click anywhere else on the map. You can zoom in and out within the map to get a better view of the locations! 
+                </p>
+            </header>
+            <section>
+                <h2> Day One - Arrival </h2>
+                <h3> Stop One: The Anndore House </h3>
+                <p> Arrive at your home base for the weekend - The Anndore House. Long before The Anndore House became one of Toronto's most stylish and celebrated hotels, it was The Anndore Hotel & Apartments, a charming 
+                    10-story brick building that opened in the 1950's. It was home to many of Toronto's most eccentric personalities and famous faces. </p> <!--  Description from: https://theanndorehouse.com/house/ -->
+                <h3> Stop Two: Hemingway's Restaurant </h3>
+                <p> After you have had the chance to settle into your new digs it's time for your first restaurant of the trip! Famous for their incredible rooftop patio, Hemingway's is an iconic Toronto spot! They have called 
+                    Yorkville home for 39 years, known as their “home away from home”, being all the way from New Zealand. </p> <!--  Description from: https://hemingways.to/ -->
+            </section>
+            <section>
+                <h2> Day Two - Cultural Enrichment</h2>
+                <h3> Stop Three: ROM - The Royal Ontario Museum </h3>
+                <p> Get ready to start the trip off with a BANG! Make your way to the Royal Ontario Museum, known as the ROM to locals! The Royal Ontario Museum is a museum of art, world culture and natural history in Toronto, 
+                    Ontario, Canada. It is one of the largest museums in North America and the largest in Canada. It attracts more than one million visitors every year, making the ROM the most-visited museum in Canada </p> <!-- Description form: https://en.wikipedia.org/wiki/Royal_Ontario_Museum -->
+                <h3> Stop Four: AGO - The Art Gallery Of Ontario </h3>
+                <p> Once you have soaked in all the history of the ROM head over to the Art Gallery of Ontario for some exciting exhibits! The Art Gallery of Ontario is an art museum in Toronto, Ontario, Canada. The museum is 
+                    located in the Grange Park neighbourhood of downtown Toronto, on Dundas Street West between McCaul and Beverley streets just east of Chinatown </p> <!--  Description from: https://en.wikipedia.org/wiki/Art_Gallery_of_Ontario -->
+                <h3> Stop Five: Seven Lives Tacos y Mariscos </h3>
+                <p> Once your ready to start winding down the day make your way over to Seven Lives Tacos y Mariscos to have you fill of tacos! Seven Lives is located in the heart of Toronto's historic Kensington Market. They established ourselves in 2012 
+                    with a mission serve the freshest and tastiest Baja style tacos in a fun and exciting atmosphere. </p> <!-- Description from: https://sevenlivesto.ca/ -->
+            </section>
+            <section>
+                <h2> Day Three - The Fun Zone </h2>
+                <h3> Stop Six: CN Tower </h3>
+                <p> Even though the trip is almost over there is still some time to squeeze in some fun! Head down to the CN Tower; a signature icon of Toronto's skyline. Teh CN Tower attracts more than two million international visitors annually. 
+                    It houses several observation decks, a revolving restaurant at some 1,151 feet (351 metres), and an entertainment complex </p> <!--  Description from: https://en.wikipedia.org/wiki/CN_Tower -->
+                <h3> Stop Seven: Ripley's Aquarium </h3>
+                <p> Next up oh the adventure - Canada's Ripley's Aquarium! Ripley's Aquarium of Canada is a public aquarium in Toronto, Ontario, Canada. The aquarium is one of three aquariums owned-and-operated by Ripley Entertainment. 
+                    It is located in downtown Toronto, just southeast of the CN Tower </p> <!-- Description form: https://en.wikipedia.org/wiki/Ripley's_Aquarium_of_Canada -->
+                <h3> Stop Eight: The Rec Room </h3>
+                <p> The final stop on your weekend getaway? Grab som grub and have sum fun at The Rec Room! Located at Roundhouse Park in downtown Toronto, just steps away from the CN Tower, Rogers Centre, Metro Toronto Convention Centre, Air Canada Centre and Billy Bishop Airport. 
+                    The Rec Room redefines the meaning of fun with over 40,000 sq. feet of great games, mouth-watering eats and amazing entertainment, all packed under 1 roof! </p> <!-- Description from: https://www.therecroom.com/toronto-roundhouse/our-story -->
+            </section>
+        </article>
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+        <div id="legend"><h3>Legend</h3></div>
+    </body>
 </html>
