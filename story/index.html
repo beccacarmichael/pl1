@@ -61,18 +61,27 @@
             map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
 
             const div = document.createElement("div");
-            div.innerHTML = '<img src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi-dotless2_hdpi.png"> ' + "Trip Stop";
+            div.innerHTML = '<img src="Stop.marker.png"> ' + "Trip Stop";
             legend.appendChild(div);
 
         });
       </script>
+      <!-- The CSS -->
       <style type="text/css">
         body {
           font-family: Arial, sans-serif;
         }
         h1 {
             text-align: center;
+            color: darkgreen;
+            font-size: 50px;
         }
+        h2 {
+            color: darkgreen;
+        }
+        section {
+            background-color: rgb(138, 209, 206);
+        }        
         #map-container {
           display: flex;
           justify-content: center;
